@@ -2,18 +2,6 @@ function Resume() {
     return (
       <div className="resume-content">
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <img 
-            src="/profile.jpg" 
-            alt="Madhav Khanal"
-            style={{
-              width: '180px',
-              height: '180px',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '1px solid var(--border)',
-              marginBottom: '30px'
-            }}
-          />
           <h1 style={{ fontSize: '48px', marginBottom: '10px', fontWeight: '700' }}>
             Madhav Khanal
           </h1>

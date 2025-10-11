@@ -17,7 +17,7 @@ function Home() {
       <section className="hero">
         <h1>Math, CS, and Puzzles</h1>
         <p>
-          Second-year student exploring algorithms, mathematics, and problem-solving. 
+          Math and Computer Science Undergrad student exploring algorithms, mathematics, and problem-solving. 
           Writing short posts with clear explanations and animations.
         </p>
       </section>
