@@ -10,7 +10,7 @@ from urllib.parse import quote_plus
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=os.getenv('ALLOWED_ORIGINS', 'http://localhost:5173').split(','))
+CORS(app, origins=os.getenv('ALLOWED_ORIGINS', 'http://localhost:5173,http://localhost:3000').split(','))
 
 # MongoDB connection with proper URI handling
 def get_mongo_client():
@@ -21,7 +21,11 @@ def get_mongo_client():
     
     try:
         # Try to connect with the URI as-is first
-        return MongoClient(mongodb_uri)
+        return MongoClient(
+            mongodb_uri,
+            tlsAllowInvalidCertificates=True,
+            tlsAllowInvalidHostnames=True
+        )
     except Exception as e:
         if "InvalidURI" in str(e) and "quote_plus" in str(e):
             print("Warning: MongoDB URI contains special characters that need encoding")
@@ -33,9 +37,9 @@ try:
     client = get_mongo_client()
     db = client.get_database()
     comments = db.comments
-    print("✅ Connected to MongoDB successfully")
+    print("Connected to MongoDB successfully")
 except Exception as e:
-    print(f"❌ MongoDB connection failed: {e}")
+    print(f" MongoDB connection failed: {e}")
     print("\nTo fix this:")
     print("1. Create a .env file in the Backend directory")
     print("2. Add your MongoDB URI with URL-encoded credentials")
@@ -53,7 +57,7 @@ def health():
 @app.route('/api/comments/<post_slug>', methods=['GET'])
 def get_comments(post_slug):
     """Get all comments for a post"""
-    if not comments:
+    if comments is None:
         return jsonify({'success': False, 'error': 'Database not connected'}), 500
     
     try:
@@ -77,7 +81,7 @@ def get_comments(post_slug):
 @app.route('/api/comments', methods=['POST'])
 def create_comment():
     """Create a new comment"""
-    if not comments:
+    if comments is None:
         return jsonify({'success': False, 'error': 'Database not connected'}), 500
     
     try:

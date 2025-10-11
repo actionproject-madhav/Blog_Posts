@@ -92,7 +92,6 @@ function BlogPost() {
         postTitle={post.title}
         postUrl={`${window.location.origin}/blog/${slug}`}
       />
-      <Comments postSlug={slug} />
     </article>
   )
 }
