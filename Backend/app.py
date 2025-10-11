@@ -9,6 +9,9 @@ import re
 from email_validator import validate_email, EmailNotValidError
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from Collections import Counter
+from datetime import timedelta
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -161,6 +164,38 @@ def create_comment():
     
     except Exception as e:
         print(f"Error creating comment: {str(e)}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/admin/analytics', methods=['GET'])
+@requires_admin_auth
+def get_analytics():
+    """Get comment analytics"""
+    try:
+        all_comments = list(comments_collection.find({'is_deleted': False}))
+        
+        # Top posts by comment count
+        post_counts = Counter(c['post_slug'] for c in all_comments)
+        top_posts = [{'post': k, 'count': v} for k, v in post_counts.most_common(10)]
+        
+        # Comments per day (last 30 days)
+        thirty_days_ago = datetime.utcnow() - timedelta(days=30)
+        recent_comments = [c for c in all_comments if c['created_at'] > thirty_days_ago]
+        
+        comments_by_date = {}
+        for comment in recent_comments:
+            date = comment['created_at'].date().isoformat()
+            comments_by_date[date] = comments_by_date.get(date, 0) + 1
+        
+        return jsonify({
+            'success': True,
+            'total_comments': len(all_comments),
+            'approved_comments': len([c for c in all_comments if c.get('is_approved')]),
+            'top_posts': top_posts,
+            'comments_by_date': comments_by_date,
+            'total_likes': sum(c.get('likes', 0) for c in all_comments),
+            'avg_likes_per_comment': sum(c.get('likes', 0) for c in all_comments) / len(all_comments) if all_comments else 0
+        }), 200
+    except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/comments/<comment_id>/like', methods=['POST'])
