@@ -45,9 +45,7 @@ class AdversarialMLIntro(Scene):
         
         # Model box (center)
         model_box = Rectangle(width=2, height=1.5, color=GREEN)
-        model_text = Text("ML Model", font_size=28)
-        model_text.move_to(model_box.get_center())
-        model = VGroup(model_box, model_text)
+        model = VGroup(model_box)
         
         # Prediction (right side)
         prediction = Text("Prediction: Panda\nConfidence: 99.7%", 
