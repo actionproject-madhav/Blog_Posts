@@ -28,9 +28,15 @@ class AdversarialMLIntro(Scene):
         self.final_message()
         
     def scene_normal_prediction(self):
-        # Image placeholder (left side)
-        img_box = Square(side_length=3, color=BLUE)
-        img_box.shift(LEFT * 3.5)
+        # Real image (left side)
+        img = ImageMobject("panda.png")
+        img.scale(1.5)
+        img.shift(LEFT * 3.5)
+        
+        # Border around image
+        img_border = SurroundingRectangle(img, color=BLUE, buff=0.1)
+        img_box = Group(img, img_border)
+        
         img_label = Text("Panda Image", font_size=24)
         img_label.next_to(img_box, DOWN)
         
@@ -59,6 +65,8 @@ class AdversarialMLIntro(Scene):
         
         # Store for next scene
         self.img_box = img_box
+        self.img = img
+        self.img_border = img_border
         self.img_label = img_label
         self.arrow = arrow
         self.model = model
@@ -72,26 +80,23 @@ class AdversarialMLIntro(Scene):
         noise_text = Text("+ Adversarial\nNoise", font_size=24, color=RED)
         noise_text.next_to(self.img_box, UP)
         
-        # Create noise effect (random dots)
-        dots = VGroup(*[
-            Dot(point=self.img_box.get_center() + 
-                np.array([np.random.uniform(-1.3, 1.3), 
-                         np.random.uniform(-1.3, 1.3), 0]),
-                radius=0.03, color=RED)
-            for _ in range(50)
-        ])
+        # Load noise image
+        noise_img = ImageMobject("noise.jpeg")
+        noise_img.scale(1.5)
+        noise_img.move_to(self.img.get_center())
+        noise_img.set_opacity(0.6)  # Make it semi-transparent
         
         self.play(Write(noise_text))
-        self.play(FadeIn(dots, lag_ratio=0.1), run_time=1.5)
+        self.play(FadeIn(noise_img, lag_ratio=0.1), run_time=1.5)
         self.wait(0.5)
         
-        # Flash effect on image
+        # Flash effect on image border
         self.play(
-            self.img_box.animate.set_color(RED),
+            self.img_border.animate.set_color(RED),
             run_time=0.3
         )
         self.play(
-            self.img_box.animate.set_color(BLUE),
+            self.img_border.animate.set_color(BLUE),
             run_time=0.3
         )
         
@@ -103,13 +108,20 @@ class AdversarialMLIntro(Scene):
         self.play(Transform(self.img_label, new_label))
         self.wait(0.5)
         
-        self.play(FadeOut(noise_text), FadeOut(dots))
+        self.play(FadeOut(noise_text), FadeOut(noise_img))
         
     def scene_fooled_prediction(self):
+        # Show gibbon image on the right
+        gibbon_img = ImageMobject("gibbon.png")
+        gibbon_img.scale(0.8)
+        gibbon_img.shift(RIGHT * 4 + UP * 1)
+        gibbon_label = Text("What model 'sees'", font_size=20, color=RED)
+        gibbon_label.next_to(gibbon_img, UP)
+        
         # Wrong prediction
         wrong_prediction = Text("Prediction: Gibbon\nConfidence: 99.3%", 
                                font_size=28, color=RED)
-        wrong_prediction.shift(RIGHT * 3.5)
+        wrong_prediction.shift(RIGHT * 3.5 + DOWN * 1.5)
         
         # Cross mark
         cross = VGroup(
@@ -118,6 +130,8 @@ class AdversarialMLIntro(Scene):
         ).scale(0.5)
         cross.next_to(wrong_prediction, UP)
         
+        self.play(FadeIn(gibbon_img), Write(gibbon_label))
+        self.wait(0.5)
         self.play(Write(wrong_prediction))
         self.play(Create(cross))
         self.wait(1)
