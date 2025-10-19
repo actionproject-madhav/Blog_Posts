@@ -17,3 +17,12 @@ While the attacks on Machine Learning models have been there for a long time, th
 
 Let's say we have a model that detects an image of animals. As shown below, it correctly identifies the image as a Panda. An attacker adds a small distortion to the image. To a human eye, the image on the right is clearly a Panda and looks the same as the image on the left. However, the model thinks the image on the right is a Gibbon with a very high confidence. This is a classic example of fooling the deep neural network. But what's so special about these distortions that look like nothing to human eyes, but make the models go terribly wrong? Read on to explore the wonderful math behind adversarial attacks.
 
+## Visual Demonstration
+
+Watch this video to see adversarial attacks in action:
+
+<video controls width="100%">
+  <source src="/videos/media/videos/Adversarial.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
