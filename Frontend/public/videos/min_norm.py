@@ -34,7 +34,7 @@ class MinimumNormDemo(Scene):
         problem.shift(UP * 0.5)
         
         constraint = Text(
-            "subject to: max_j≠t g_j(x) - g_t(x) ≤ 0",
+            "subject to: max_{j≠t} g_j(x) - g_t(x) ≤ 0",
             font_size=30
         )
         constraint.next_to(problem, DOWN, buff=0.7)
@@ -120,7 +120,6 @@ class MinimumNormDemo(Scene):
         x0_point = Dot(axes.c2p(-1, -2), color=BLUE, radius=0.12)
         x0_label = Text("x₀", font_size=28, color=BLUE)
         x0_label.next_to(x0_point, LEFT, buff=0.3)
-        
         self.play(FadeIn(x0_point), Write(x0_label))
         self.wait(1)
         
@@ -146,7 +145,7 @@ class MinimumNormDemo(Scene):
             stroke_width=4
         )
         large_pert_label = Text("Large\nperturbation", font_size=18, color=RED)
-        large_pert_label.move_to(self.axes.c2p(3.2, 0.3))
+        large_pert_label.move_to(self.axes.c2p(3.9, 0.3))
         
         self.play(
             GrowArrow(large_pert_arrow),

@@ -1,7 +1,20 @@
 
+---
+title: "Minimum Norm Attack: Finding the Smallest Adversarial Perturbation"
+date: "2025-01-20"
+excerpt: "Exploring the minimum norm attack, an optimization approach that finds the smallest possible perturbation to cause misclassification while maintaining visual similarity to humans."
+tags: ["machine-learning", "adversarial-attacks", "optimization", "mathematics"]
+---
+
 ## Minimum Norm Attack
 
 I mentioned above that the perturbed data point is very small and there is a slight difference between the original vector $x_0$ and the new vector $x$. How do we decide what's the perturbation? How do we ensure it's as small as possible while still misclassifying the initial cat? This can be formulated as an interesting optimization problem.
+
+
+<video width="100%" controls>
+  <source src="../videos/media/videos/min_norm/min_norm.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### The Optimization Problem
 
@@ -28,10 +41,6 @@ As shown in the definition, the goal of the minimum norm attack is to minimize t
 
 **Key insight:** We're finding the **smallest possible change** that crosses the decision boundary of the classifier.
 
-<video width="100%" controls>
-  <source src="../videos/media/videos/min_norm/min_norm.mp4" type="video/mp4">
-</video>
-*Placeholder: Manim animation showing decision boundary and minimum perturbation*
 
 ### Generalization Beyond Classification
 
