@@ -28,9 +28,10 @@ $$x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} + \begin{bmatrix} r
 *Placeholder: Create a vector diagram showing x₀, r, and x = x₀ + r*
 
 <video width="100%" controls>
-  <source src="additive_attack_demo.mp4" type="video/mp4">
+  <source src="../videos/media/videos/additive/Additive.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
-*Placeholder: Manim animation showing the addition of noise vector to original vector*
+*Manim animation demonstrating additive perturbation attack: showing how a small noise vector r is added to the original vector x₀ to create a perturbed vector x that gets misclassified*
 
 ## Minimum Norm Attack
 
