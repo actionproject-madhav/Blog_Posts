@@ -1,6 +1,7 @@
 {
     "posts": [
       "first",
-      "adversarial_intro"
+      "adversarial_intro",
+      "additive_attack"
     ]
   }

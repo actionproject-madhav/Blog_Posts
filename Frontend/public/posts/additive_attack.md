@@ -1,3 +1,10 @@
+---
+title: "Formulating Attacks: Additive Perturbations in Adversarial Machine Learning"
+date: "2025-01-20"
+excerpt: "Exploring additive perturbation attacks in adversarial machine learning, where small noise vectors are added to data points to cause misclassification while remaining imperceptible to humans."
+tags: ["machine-learning", "adversarial-attacks", "optimization", "mathematics"]
+---
+
 # Formulating Attacks
 
 An adversarial attack is an attempt to perturb the data point $x \in \mathbb{R}^d$ to another point $x' \in \mathbb{R}^d$. For instance, if $x$ is the feature vector of a panda, we want $x'$ to be the feature vector, with the same dimension, but that of a gibbon. 
