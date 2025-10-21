@@ -4,8 +4,7 @@ An adversarial attack is an attempt to perturb the data point $x \in \mathbb{R}^
 
 If we specifically want the attack such that the detection is gibbon, this is called a **targeted attack** as now we have a target we aim at. However, if all we want is just misclassify, I don';t care whether the panda is detected as a gibbon or a dog, all I want is it should be detected wrong. This kind of attack is **untargeted**.
 
-![Types of Attacks Visualization](attack_types.png)
-*Placeholder: Create a diagram showing targeted vs untargeted attacks with example images*
+![Types of Attacks Visualization](attack_types.jpg)
 
 ## Additive Attacks
 
