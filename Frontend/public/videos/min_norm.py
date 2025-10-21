@@ -27,37 +27,37 @@ class MinimumNormDemo(Scene):
         
     def show_optimization_problem(self):
         # Optimization problem
-        problem = MathTex(
-            r"\min_{x} \|x - x_0\|",
-            font_size=40
+        problem = Text(
+            "min_x ||x - x₀||",
+            font_size=38
         )
-        problem.shift(UP * 1.5)
+        problem.shift(UP * 0.5)
         
-        constraint = MathTex(
-            r"\text{subject to: } \max_{j \neq t} g_j(x) - g_t(x) \leq 0",
-            font_size=36
+        constraint = Text(
+            "subject to: max_j≠t g_j(x) - g_t(x) ≤ 0",
+            font_size=30
         )
-        constraint.next_to(problem, DOWN, buff=0.5)
+        constraint.next_to(problem, DOWN, buff=0.7)
         
         self.play(Write(problem))
         self.wait(1)
         self.play(Write(constraint))
         self.wait(1)
         
-        # Explanation boxes
+        # Explanation boxes - positioned well below
         obj_explanation = Text(
             "Minimize perturbation size",
-            font_size=28,
+            font_size=26,
             color=BLUE
         )
-        obj_explanation.next_to(problem, DOWN, buff=1.5)
+        obj_explanation.shift(DOWN * 1.5)
         
         constraint_explanation = Text(
             "While ensuring misclassification",
-            font_size=28,
+            font_size=26,
             color=RED
         )
-        constraint_explanation.next_to(constraint, DOWN, buff=0.8)
+        constraint_explanation.next_to(obj_explanation, DOWN, buff=0.6)
         
         self.play(FadeIn(obj_explanation))
         self.wait(0.5)
@@ -69,18 +69,18 @@ class MinimumNormDemo(Scene):
             problem, constraint, obj_explanation, constraint_explanation
         )
         self.play(FadeOut(self.problem_group))
+        self.wait(0.5)
         
     def visualize_decision_boundary(self):
-        # Create axes
+        # Create axes - smaller to leave room for labels
         axes = Axes(
             x_range=[-4, 4, 1],
             y_range=[-3, 3, 1],
-            x_length=8,
-            y_length=6,
+            x_length=7,
+            y_length=5,
             axis_config={"include_tip": False, "stroke_width": 2},
-        ).shift(DOWN * 0.3)
+        ).shift(DOWN * 0.5)
         
-        # Don't show axes labels to reduce clutter
         self.play(Create(axes), run_time=1)
         
         # Decision boundary (curved line)
@@ -91,37 +91,35 @@ class MinimumNormDemo(Scene):
             stroke_width=5
         )
         
-        boundary_label = Text("Decision Boundary", font_size=24, color=YELLOW)
-        boundary_label.move_to(axes.c2p(0, 1.5))
+        boundary_label = Text("Decision Boundary", font_size=22, color=YELLOW)
+        boundary_label.move_to(axes.c2p(-1.5, 2))
         
         self.play(Create(boundary), Write(boundary_label))
         self.wait(1)
         
         # Class regions with actual images
-        # IMAGE PLACEHOLDER: cat_icon.png (small icon)
         cat_img = ImageMobject("cat_icon.png")
-        cat_img.scale(0.4)
-        cat_img.move_to(axes.c2p(-2.5, -2))
+        cat_img.scale(0.35)
+        cat_img.move_to(axes.c2p(-2.5, -2.2))
         
-        cat_region = Text("Cat Region", font_size=24, color=BLUE)
-        cat_region.next_to(cat_img, DOWN, buff=0.1)
+        cat_region = Text("Cat Region", font_size=20, color=BLUE)
+        cat_region.move_to(axes.c2p(-2.5, -1.4))
         
-        # IMAGE PLACEHOLDER: dog_icon.png (small icon)
         dog_img = ImageMobject("dog_icon.png")
-        dog_img.scale(0.4)
-        dog_img.move_to(axes.c2p(2, 1.2))
+        dog_img.scale(0.35)
+        dog_img.move_to(axes.c2p(2.3, 1.8))
         
-        dog_region = Text("Dog Region", font_size=24, color=GREEN)
-        dog_region.next_to(dog_img, DOWN, buff=0.1)
+        dog_region = Text("Dog Region", font_size=20, color=GREEN)
+        dog_region.move_to(axes.c2p(2.3, 1.0))
         
         self.play(FadeIn(cat_img), FadeIn(cat_region))
         self.play(FadeIn(dog_img), FadeIn(dog_region))
         self.wait(1)
         
         # Original point x0
-        x0_point = Dot(axes.c2p(-1.5, -1.5), color=BLUE, radius=0.12)
-        x0_label = MathTex(r"x_0", font_size=32, color=BLUE)
-        x0_label.next_to(x0_point, LEFT, buff=0.2)
+        x0_point = Dot(axes.c2p(-1, -2), color=BLUE, radius=0.12)
+        x0_label = Text("x₀", font_size=28, color=BLUE)
+        x0_label.next_to(x0_point, LEFT, buff=0.3)
         
         self.play(FadeIn(x0_point), Write(x0_label))
         self.wait(1)
@@ -138,8 +136,8 @@ class MinimumNormDemo(Scene):
         self.x0_label = x0_label
         
     def show_minimum_perturbation(self):
-        # Show multiple possible perturbations
-        large_pert_point = Dot(self.axes.c2p(1.5, 1), color=RED, radius=0.1)
+        # Show large perturbation first
+        large_pert_point = Dot(self.axes.c2p(1.8, 1.3), color=RED, radius=0.1)
         large_pert_arrow = Arrow(
             self.x0_point.get_center(),
             large_pert_point.get_center(),
@@ -147,8 +145,8 @@ class MinimumNormDemo(Scene):
             color=RED,
             stroke_width=4
         )
-        large_pert_label = Text("Large perturbation", font_size=22, color=RED)
-        large_pert_label.next_to(large_pert_point, UP, buff=0.2)
+        large_pert_label = Text("Large\nperturbation", font_size=18, color=RED)
+        large_pert_label.move_to(self.axes.c2p(3.2, 0.3))
         
         self.play(
             GrowArrow(large_pert_arrow),
@@ -173,9 +171,10 @@ class MinimumNormDemo(Scene):
             FadeOut(large_pert_label),
             FadeOut(cross)
         )
+        self.wait(0.3)
         
         # Show optimal (minimum) perturbation
-        optimal_point = Dot(self.axes.c2p(-0.2, -0.3), color=GREEN, radius=0.12)
+        optimal_point = Dot(self.axes.c2p(-0.3, -0.4), color=GREEN, radius=0.12)
         optimal_arrow = Arrow(
             self.x0_point.get_center(),
             optimal_point.get_center(),
@@ -184,11 +183,11 @@ class MinimumNormDemo(Scene):
             stroke_width=6
         )
         
-        optimal_label = MathTex(r"x^*", font_size=32, color=GREEN)
-        optimal_label.next_to(optimal_point, RIGHT, buff=0.2)
+        optimal_label = Text("x*", font_size=28, color=GREEN)
+        optimal_label.next_to(optimal_point, UP, buff=0.3)
         
-        min_pert_text = Text("Minimum perturbation", font_size=24, color=GREEN)
-        min_pert_text.next_to(optimal_point, DOWN, buff=0.8)
+        min_pert_text = Text("Minimum\nperturbation", font_size=18, color=GREEN)
+        min_pert_text.move_to(self.axes.c2p(2.1, -1))
         
         self.play(
             GrowArrow(optimal_arrow),
@@ -226,34 +225,34 @@ class MinimumNormDemo(Scene):
         )
         self.wait(0.5)
         
-        # Key insight
+        # Key insight - better spacing
         insight1 = Text(
             "Minimum Norm Attack finds the",
-            font_size=34
+            font_size=32
         )
-        insight1.shift(UP * 1.5)
+        insight1.shift(UP * 1.8)
         
         insight2 = Text(
             "SMALLEST possible perturbation",
-            font_size=38,
+            font_size=36,
             color=BLUE,
             weight=BOLD
         )
-        insight2.next_to(insight1, DOWN, buff=0.4)
+        insight2.next_to(insight1, DOWN, buff=0.5)
         
         insight3 = Text(
             "that crosses the decision boundary",
-            font_size=34
+            font_size=32
         )
-        insight3.next_to(insight2, DOWN, buff=0.4)
+        insight3.next_to(insight2, DOWN, buff=0.5)
         
-        # Formula
-        formula = MathTex(
-            r"\|x^* - x_0\| = \text{minimum}",
-            font_size=44,
+        # Formula - positioned lower
+        formula = Text(
+            "||x* - x₀|| = minimum",
+            font_size=40,
             color=GREEN
         )
-        formula.shift(DOWN * 1.5)
+        formula.shift(DOWN * 1.8)
         
         self.play(Write(insight1))
         self.wait(0.3)
