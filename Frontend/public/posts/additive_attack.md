@@ -7,13 +7,19 @@ tags: ["machine-learning", "adversarial-attacks", "optimization", "mathematics"]
 
 # Formulating Attacks
 
+<video width="100%" controls>
+  <source src="../videos/media/videos/additive/Additive.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 An adversarial attack is an attempt to perturb the data point $x \in \mathbb{R}^d$ to another point $x' \in \mathbb{R}^d$. For instance, if $x$ is the feature vector of a panda, we want $x'$ to be the feature vector, with the same dimension, but that of a gibbon. 
 
 If we specifically want the attack such that the detection is gibbon, this is called a **targeted attack** as now we have a target we aim at. However, if all we want is just misclassify, I don';t care whether the panda is detected as a gibbon or a dog, all I want is it should be detected wrong. This kind of attack is **untargeted**.
 
-![Types of Attacks Visualization](attack_types.jpg)
-
 ## Additive Attacks
+
+
+
 
 Let $x_0 \in \mathbb{R}^d$ be a data point belonging to class $C_i$. Define a target class $C_t$. An adversarial attack is a mapping $A: \mathbb{R}^d \to \mathbb{R}^d$ such that the perturbed data $x = A(x_0)$ is misclassified as $C_t$.
 
@@ -31,14 +37,9 @@ Additive attacks guarantee that the input space remains unchanged. For example, 
 
 $$x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} + \begin{bmatrix} r_1 \\ r_2 \\ r_3 \\ r_4 \end{bmatrix} = \begin{bmatrix} x_1 + r_1 \\ x_2 + r_2 \\ x_3 + r_3 \\ x_4 + r_4 \end{bmatrix}$$
 
-![Additive Perturbation Visualization](additive_perturbation.png)
-*Placeholder: Create a vector diagram showing x₀, r, and x = x₀ + r*
+![Additive Perturbation Visualization](/posts/additive_pertubation.png)
 
-<video width="100%" controls>
-  <source src="../videos/media/videos/additive/Additive.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-*Manim animation demonstrating additive perturbation attack: showing how a small noise vector r is added to the original vector x₀ to create a perturbed vector x that gets misclassified*
+
 
 ## Minimum Norm Attack
 
@@ -48,10 +49,11 @@ I mentioned above that the perturbed data point is very small and there is a sli
 
 The minimum norm attack finds a perturbed data $x$ by solving the optimization:
 
-$$\begin{aligned}
-\min_{x} \quad & \|x - x_0\| \\
-\text{subject to} \quad & \max_{j \neq t} \{g_j(x)\} - g_t(x) \leq 0
-\end{aligned}$$
+$$\min_{x} \|x - x_0\|$$
+
+subject to:
+
+$$\max_{j \neq t} \{g_j(x)\} - g_t(x) \leq 0$$
 
 where $\|\cdot\|$ can be any norm specified by the user (commonly $L_2$ or $L_\infty$ norm), and $g_j(x)$ represents the model's confidence score for class $j$.
 
@@ -61,8 +63,6 @@ The constraint $\max_{j \neq t} \{g_j(x)\} - g_t(x) \leq 0$ ensures that:
 - $g_t(x)$ (confidence for target class $C_t$) is greater than all other class confidences
 - This forces the model to classify $x$ as the target class $C_t$
 
-![Minimum Norm Attack Visualization](minimum_norm_attack.png)
-*Placeholder: Create a diagram showing the feasible region and optimal perturbation*
 
 ### Why This Matters
 
@@ -71,7 +71,7 @@ As shown in the definition, the goal of the minimum norm attack is to minimize t
 **Key insight:** We're finding the **smallest possible change** that crosses the decision boundary of the classifier.
 
 <video width="100%" controls>
-  <source src="minimum_norm_demo.mp4" type="video/mp4">
+  <source src="../videos/media/videos/min_norm/min_norm.mp4" type="video/mp4">
 </video>
 *Placeholder: Manim animation showing decision boundary and minimum perturbation*
 
