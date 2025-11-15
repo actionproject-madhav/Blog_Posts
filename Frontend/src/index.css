@@ -434,6 +434,37 @@ a[href*="spline.design"] {
   line-height: 1.8;
 }
 
+/* About page with Spline background - add backgrounds to sections for readability */
+.about-with-spline-bg > section {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .about-with-spline-bg > section {
+  background-color: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-with-spline-bg > div:first-child {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .about-with-spline-bg > div:first-child {
+  background-color: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .about-content h2,
 .resume-content h2 {
   font-size: 32px;

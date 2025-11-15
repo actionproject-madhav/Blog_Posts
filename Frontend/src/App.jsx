@@ -10,7 +10,17 @@ import Admin from './pages/Admin'
 
 function AppContent({ theme, setTheme, toggleTheme }) {
   const location = useLocation()
-  const showSpline = location.pathname === '/'
+  const showSpline = location.pathname === '/' || location.pathname === '/about'
+
+  // Different Spline scenes for different pages
+  const getSplineScene = () => {
+    if (location.pathname === '/') {
+      return "https://prod.spline.design/J6tsAlAO6E4HY7Wq/scene.splinecode"
+    } else if (location.pathname === '/about') {
+      return "https://prod.spline.design/Anob6XCn921GlqBo/scene.splinecode"
+    }
+    return null
+  }
 
   return (
     <div className="app">
@@ -18,7 +28,7 @@ function AppContent({ theme, setTheme, toggleTheme }) {
       {showSpline && (
         <div className="spline-full-background">
           <Spline
-            scene="https://prod.spline.design/J6tsAlAO6E4HY7Wq/scene.splinecode"
+            scene={getSplineScene()}
           />
           <div className="spline-watermark-overlay"></div>
         </div>

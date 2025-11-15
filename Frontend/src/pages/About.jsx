@@ -1,8 +1,6 @@
-import Spline from '@splinetool/react-spline'
-
 function About() {
   return (
-    <div className="about-content">
+    <div className="about-content about-with-spline-bg">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '40px', marginBottom: '50px', flexWrap: 'wrap' }}>
         <img 
           src="/profile.jpeg" 
@@ -96,34 +94,6 @@ function About() {
         </div>
       </div>
 
-      {/* Spline 3D Animation */}
-      <div style={{ 
-        position: 'relative',
-        width: '100%', 
-        height: '500px', 
-        borderRadius: '12px',
-        marginBottom: '60px',
-        overflow: 'hidden',
-        border: '1px solid var(--border)'
-      }}>
-        <Spline
-          scene="https://prod.spline.design/Anob6XCn921GlqBo/scene.splinecode"
-        />
-        {/* Watermark overlay - darken/blur bottom right corner */}
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          width: '200px',
-          height: '80px',
-          background: 'linear-gradient(to top right, var(--bg-primary) 0%, var(--bg-primary) 50%, transparent 100%)',
-          zIndex: 3,
-          pointerEvents: 'none',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          borderRadius: '0 0 12px 0'
-        }}></div>
-      </div>
 
       <section style={{ marginBottom: '60px' }}>
         <h2 style={{ fontSize: '32px', marginBottom: '20px', fontWeight: '600' }}>Background</h2>
@@ -192,7 +162,7 @@ function About() {
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
           gap: '30px',
           marginBottom: '40px'
         }}>
@@ -223,24 +193,41 @@ function About() {
           >
             <div style={{ 
               width: '100%', 
-              height: '200px', 
+              height: '250px', 
               backgroundColor: 'var(--bg-secondary)',
-              backgroundImage: 'url(/projects/finlit.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              position: 'relative'
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <img 
+                src="/projects/finlit.jpg" 
+                alt="Finlit Project"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'flex'
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
               <div style={{
+                display: 'none',
                 position: 'absolute',
-                bottom: '8px',
-                right: '8px',
-                fontSize: '11px',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'var(--bg-secondary)',
+                fontSize: '12px',
                 color: 'var(--text-muted)',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                padding: '4px 8px',
-                borderRadius: '4px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                Add: /public/projects/finlit.jpg
+                <div>Add image:</div>
+                <div style={{ fontSize: '11px' }}>/public/projects/finlit.jpg</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
@@ -303,24 +290,41 @@ function About() {
           >
       <div style={{ 
         width: '100%', 
-              height: '200px', 
+              height: '250px', 
               backgroundColor: 'var(--bg-secondary)',
-              backgroundImage: 'url(/projects/zpm.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              position: 'relative'
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <img 
+                src="/projects/zpm.jpg" 
+                alt="Zero Panic in Movement Project"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'flex'
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
               <div style={{
+                display: 'none',
                 position: 'absolute',
-                bottom: '8px',
-                right: '8px',
-                fontSize: '11px',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'var(--bg-secondary)',
+                fontSize: '12px',
                 color: 'var(--text-muted)',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                padding: '4px 8px',
-                borderRadius: '4px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                Add: /public/projects/zpm.jpg
+                <div>Add image:</div>
+                <div style={{ fontSize: '11px' }}>/public/projects/zpm.jpg</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
@@ -383,24 +387,41 @@ function About() {
           >
             <div style={{ 
               width: '100%', 
-              height: '200px', 
+              height: '250px', 
               backgroundColor: 'var(--bg-secondary)',
-              backgroundImage: 'url(/projects/curasyn.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              position: 'relative'
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <img 
+                src="/projects/curasyn.jpg" 
+                alt="CuraSyn+ Project"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'flex'
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
               <div style={{
+                display: 'none',
                 position: 'absolute',
-                bottom: '8px',
-                right: '8px',
-                fontSize: '11px',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+                backgroundColor: 'var(--bg-secondary)',
+                fontSize: '12px',
                 color: 'var(--text-muted)',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                padding: '4px 8px',
-                borderRadius: '4px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                Add: /public/projects/curasyn.jpg
+                <div>Add image:</div>
+                <div style={{ fontSize: '11px' }}>/public/projects/curasyn.jpg</div>
               </div>
       </div>
             <div style={{ padding: '24px' }}>
@@ -462,24 +483,41 @@ function About() {
           >
             <div style={{ 
               width: '100%', 
-              height: '200px', 
+              height: '250px', 
               backgroundColor: 'var(--bg-secondary)',
-              backgroundImage: 'url(/projects/telia.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              position: 'relative'
+              position: 'relative',
+              overflow: 'hidden'
             }}>
+              <img 
+                src="/projects/telia.jpg" 
+                alt="Telia Analytics Project"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'flex'
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
               <div style={{
+                display: 'none',
                 position: 'absolute',
-                bottom: '8px',
-                right: '8px',
-                fontSize: '11px',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'var(--bg-secondary)',
+                fontSize: '12px',
                 color: 'var(--text-muted)',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                padding: '4px 8px',
-                borderRadius: '4px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                Add: /public/projects/telia.jpg
+                <div>Add image:</div>
+                <div style={{ fontSize: '11px' }}>/public/projects/telia.jpg</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
