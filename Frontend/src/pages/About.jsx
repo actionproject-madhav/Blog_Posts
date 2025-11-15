@@ -90,7 +90,7 @@ function About() {
               onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
             >
-              📄 Resume
+               Resume
             </a>
           </div>
         </div>
@@ -192,7 +192,7 @@ function About() {
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
           gap: '30px',
           marginBottom: '40px'
         }}>
