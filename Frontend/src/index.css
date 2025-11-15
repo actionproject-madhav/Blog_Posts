@@ -45,14 +45,46 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Fixed Spline background for entire page */
+.spline-full-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #0a0a0f;
+}
+
+.spline-full-background canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
 }
 
 .main-content {
   flex: 1;
-  max-width: 720px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0;
   width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.main-content > *:not(.hero-with-spline):not(.content-section) {
+  padding: 0 20px;
+}
+
+.main-content > *:not(.hero-with-spline):first-of-type:not(.content-section) {
+  padding-top: 40px;
 }
 
 .header {
@@ -60,9 +92,15 @@ body {
   padding: 20px 0;
   position: sticky;
   top: 0;
-  background-color: var(--bg-primary);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 100;
   transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .header {
+  background-color: rgba(26, 26, 26, 0.9);
 }
 
 .header-content {
@@ -129,6 +167,96 @@ body {
   font-size: 20px;
   color: var(--text-secondary);
   margin-bottom: 30px;
+}
+
+/* Hero with Spline background - seamless full-width */
+.hero-with-spline {
+  position: relative;
+  padding: 180px 20px 150px;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 20px;
+  color: #ffffff;
+}
+
+/* Content sections with subtle background for readability over Spline */
+.content-section {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  margin-top: 80px;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+}
+
+[data-theme="dark"] .content-section {
+  background-color: rgba(26, 26, 26, 0.85);
+}
+
+.hero-content h1 {
+  color: #ffffff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  color: #f0f0f0;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+}
+
+/* Hide Spline watermark logo - multiple selectors to catch all variations */
+.spline-full-background canvas + div,
+.spline-full-background > div:last-child,
+.spline-full-background a[href*="spline"],
+.spline-full-background img[alt*="Spline"],
+.spline-full-background img[src*="spline"],
+.spline-full-background [class*="watermark"],
+.spline-full-background [class*="branding"],
+.spline-full-background [id*="watermark"],
+.spline-full-background [id*="branding"],
+iframe[src*="spline"],
+a[href*="spline.design"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Watermark overlay - blend with dark background */
+.spline-watermark-overlay {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 140px;
+  height: 50px;
+  background: radial-gradient(
+    ellipse at bottom right,
+    rgba(10, 10, 15, 0.95) 0%,
+    rgba(10, 10, 15, 0.7) 40%,
+    rgba(10, 10, 15, 0.3) 70%,
+    transparent 100%
+  );
+  z-index: 100;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .blog-grid {
@@ -306,6 +434,37 @@ body {
   line-height: 1.8;
 }
 
+/* About page with Spline background - add backgrounds to sections for readability */
+.about-with-spline-bg > section {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .about-with-spline-bg > section {
+  background-color: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-with-spline-bg > div:first-child {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .about-with-spline-bg > div:first-child {
+  background-color: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .about-content h2,
 .resume-content h2 {
   font-size: 32px;
@@ -324,6 +483,15 @@ body {
   text-align: center;
   color: var(--text-muted);
   font-size: 14px;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .footer {
+  background-color: rgba(26, 26, 26, 0.9);
 }
 
 /* Comments */
@@ -455,6 +623,32 @@ body {
 
   .hero p {
     font-size: 18px;
+  }
+
+  .hero-with-spline {
+    padding: 120px 20px 100px;
+    min-height: 65vh;
+    margin: -40px -20px 40px -20px;
+    width: calc(100% + 40px);
+  }
+
+  .hero-content {
+    padding: 0 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+  }
+
+  .spline-watermark-overlay {
+    width: 100px;
+    height: 35px;
+    bottom: 6px;
+    right: 6px;
   }
 
   .blog-header h1 {

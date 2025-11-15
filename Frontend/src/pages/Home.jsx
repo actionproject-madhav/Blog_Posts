@@ -14,15 +14,16 @@ function Home() {
 
   return (
     <div>
-      <section className="hero">
-        <h1>Math, CS, and Puzzles</h1>
-        <p>
-          Math and Computer Science Undergrad student exploring algorithms, mathematics, and problem-solving. 
-          Writing short posts with clear explanations and animations.
-        </p>
+      <section className="hero hero-with-spline">
+        <div className="hero-content">
+          <h1>Math, CS, and Puzzles</h1>
+          <p>
+            Exploring algorithms, mathematics, and problem-solving through clear explanations and interactive visualizations.
+          </p>
+        </div>
       </section>
 
-      <section>
+      <section className="content-section">
         <h2 style={{ fontSize: '28px', marginBottom: '20px', fontWeight: '600' }}>
           Recent Posts
         </h2>

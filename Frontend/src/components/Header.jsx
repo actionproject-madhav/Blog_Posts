@@ -20,9 +20,6 @@ function Header({ theme, toggleTheme }) {
           <Link to="/about" className={isActive('/about')}>
             About
           </Link>
-          <Link to="/resume" className={isActive('/resume')}>
-            Resume
-          </Link>
           <button onClick={toggleTheme} className="theme-toggle">
             {theme === 'light' ? 'Dark' : 'Light'}
           </button>
