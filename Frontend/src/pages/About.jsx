@@ -199,7 +199,7 @@ function About() {
               overflow: 'hidden'
             }}>
               <img 
-                src="/projects/finlit.jpg" 
+                src="/finlit.jpeg" 
                 alt="Finlit Project"
                 onError={(e) => {
                   e.target.style.display = 'none'
@@ -226,8 +226,8 @@ function About() {
                 flexDirection: 'column',
                 gap: '8px'
               }}>
-                <div>Add image:</div>
-                <div style={{ fontSize: '11px' }}>/public/projects/finlit.jpg</div>
+                <div>Image not found:</div>
+                <div style={{ fontSize: '11px' }}>/public/finlit.jpeg</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
@@ -296,7 +296,7 @@ function About() {
               overflow: 'hidden'
             }}>
               <img 
-                src="/projects/zpm.jpg" 
+                src="/zpm.png" 
                 alt="Zero Panic in Movement Project"
                 onError={(e) => {
                   e.target.style.display = 'none'
@@ -323,8 +323,8 @@ function About() {
                 flexDirection: 'column',
                 gap: '8px'
               }}>
-                <div>Add image:</div>
-                <div style={{ fontSize: '11px' }}>/public/projects/zpm.jpg</div>
+                <div>Image not found:</div>
+                <div style={{ fontSize: '11px' }}>/public/zpm.png</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
@@ -393,7 +393,7 @@ function About() {
               overflow: 'hidden'
             }}>
               <img 
-                src="/projects/curasyn.jpg" 
+                src="/curasyn.jpeg" 
                 alt="CuraSyn+ Project"
                 onError={(e) => {
                   e.target.style.display = 'none'
@@ -412,16 +412,16 @@ function About() {
                 left: 0,
                 width: '100%',
                 height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
                 backgroundColor: 'var(--bg-secondary)',
                 fontSize: '12px',
                 color: 'var(--text-muted)',
                 flexDirection: 'column',
                 gap: '8px'
               }}>
-                <div>Add image:</div>
-                <div style={{ fontSize: '11px' }}>/public/projects/curasyn.jpg</div>
+                <div>Image not found:</div>
+                <div style={{ fontSize: '11px' }}>/public/curasyn.jpeg</div>
               </div>
       </div>
             <div style={{ padding: '24px' }}>
@@ -489,7 +489,7 @@ function About() {
               overflow: 'hidden'
             }}>
               <img 
-                src="/projects/telia.jpg" 
+                src="/telia.jpeg" 
                 alt="Telia Analytics Project"
                 onError={(e) => {
                   e.target.style.display = 'none'
@@ -516,8 +516,8 @@ function About() {
                 flexDirection: 'column',
                 gap: '8px'
               }}>
-                <div>Add image:</div>
-                <div style={{ fontSize: '11px' }}>/public/projects/telia.jpg</div>
+                <div>Image not found:</div>
+                <div style={{ fontSize: '11px' }}>/public/telia.jpeg</div>
               </div>
             </div>
             <div style={{ padding: '24px' }}>
