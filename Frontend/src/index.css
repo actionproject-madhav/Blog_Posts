@@ -134,37 +134,39 @@ body {
 /* Hero with Spline background */
 .hero-with-spline {
   position: relative;
-  padding: 100px 0;
-  margin-bottom: 40px;
+  padding: 120px 20px;
+  margin: 0 -20px 60px -20px;
+  min-height: 500px;
   overflow: hidden;
-  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0.95) 100%
-  );
-  padding: 40px 30px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-width: 720px;
+  padding: 0 20px;
 }
 
-[data-theme="dark"] .hero-content {
-  background: linear-gradient(
-    to bottom,
-    rgba(26, 26, 26, 0.95) 0%,
-    rgba(26, 26, 26, 0.85) 50%,
-    rgba(26, 26, 26, 0.95) 100%
-  );
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+.hero-content h1 {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 24px;
+}
+
+.hero-content p {
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+}
+
+[data-theme="dark"] .hero-content h1 {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .hero-content p {
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
 }
 
 .spline-container {
@@ -175,12 +177,12 @@ body {
   height: 100%;
   z-index: 1;
   overflow: hidden;
-  border-radius: 12px;
 }
 
 .spline-container canvas {
   width: 100% !important;
   height: 100% !important;
+  object-fit: cover;
 }
 
 /* Watermark overlay - darken/blur bottom right corner */
@@ -539,11 +541,12 @@ body {
   }
 
   .hero-with-spline {
-    padding: 60px 0;
+    padding: 80px 20px;
+    min-height: 400px;
   }
 
   .hero-content {
-    padding: 30px 20px;
+    padding: 0 10px;
   }
 
   .spline-watermark-overlay {
