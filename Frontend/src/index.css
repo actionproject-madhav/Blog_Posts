@@ -51,8 +51,17 @@ body {
   flex: 1;
   max-width: 720px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0;
   width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content > *:not(.hero-with-spline) {
+  padding: 0 20px;
+}
+
+.main-content > *:not(.hero-with-spline):first-of-type {
+  padding-top: 40px;
 }
 
 .header {
@@ -131,42 +140,59 @@ body {
   margin-bottom: 30px;
 }
 
-/* Hero with Spline background */
+/* Hero with Spline background - seamless full-width */
 .hero-with-spline {
   position: relative;
-  padding: 120px 20px;
-  margin: 0 -20px 60px -20px;
-  min-height: 500px;
+  padding: 180px 20px 150px;
+  margin: 0 calc(-50vw + 50%) 60px calc(-50vw + 50%);
+  width: 100vw;
+  min-height: 75vh;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #0a0a0f;
+  box-shadow: none;
+  border: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-align: center;
   max-width: 720px;
   padding: 0 20px;
+  color: #ffffff;
 }
 
 .hero-content h1 {
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
   margin-bottom: 24px;
+  font-weight: 700;
 }
 
 .hero-content p {
-  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  color: #f0f0f0;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
   font-size: 20px;
 }
 
-[data-theme="dark"] .hero-content h1 {
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-}
-
-[data-theme="dark"] .hero-content p {
-  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+/* Subtle gradient overlay for better text readability */
+.hero-with-spline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
 }
 
 .spline-container {
@@ -185,33 +211,44 @@ body {
   object-fit: cover;
 }
 
-/* Watermark overlay - darken/blur bottom right corner */
+/* Hide Spline watermark logo - multiple selectors to catch all variations */
+.spline-container canvas + div,
+.spline-container > div:last-child,
+.spline-container a[href*="spline"],
+.spline-container img[alt*="Spline"],
+.spline-container img[src*="spline"],
+.spline-container [class*="watermark"],
+.spline-container [class*="branding"],
+.spline-container [id*="watermark"],
+.spline-container [id*="branding"],
+iframe[src*="spline"],
+a[href*="spline.design"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Watermark overlay - blend with dark background */
 .spline-watermark-overlay {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 200px;
-  height: 80px;
-  background: linear-gradient(
-    to top right,
-    var(--bg-primary) 0%,
-    var(--bg-primary) 50%,
+  width: 140px;
+  height: 50px;
+  background: radial-gradient(
+    ellipse at bottom right,
+    rgba(10, 10, 15, 0.95) 0%,
+    rgba(10, 10, 15, 0.7) 40%,
+    rgba(10, 10, 15, 0.3) 70%,
     transparent 100%
   );
-  z-index: 3;
+  z-index: 10;
   pointer-events: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 0 0 12px 0;
-}
-
-[data-theme="dark"] .spline-watermark-overlay {
-  background: linear-gradient(
-    to top right,
-    var(--bg-primary) 0%,
-    var(--bg-primary) 60%,
-    transparent 100%
-  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .blog-grid {
@@ -541,17 +578,29 @@ body {
   }
 
   .hero-with-spline {
-    padding: 80px 20px;
-    min-height: 400px;
+    padding: 120px 20px 100px;
+    min-height: 65vh;
+    margin: -40px -20px 40px -20px;
+    width: calc(100% + 40px);
   }
 
   .hero-content {
     padding: 0 10px;
   }
 
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+  }
+
   .spline-watermark-overlay {
-    width: 150px;
-    height: 60px;
+    width: 100px;
+    height: 35px;
+    bottom: 6px;
+    right: 6px;
   }
 
   .blog-header h1 {
