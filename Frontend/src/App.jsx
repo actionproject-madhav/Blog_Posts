@@ -5,7 +5,6 @@ import Home from './pages/Home'
 import BlogList from './pages/BlogList'
 import BlogPost from './components/BlogPost'
 import About from './pages/About'
-import Resume from './pages/Resume'
 import Admin from './pages/Admin'
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/about" element={<About />} />
-            <Route path="/resume" element={<Resume />} />
             <Route path="/admin" element={<Admin />} />
 
           </Routes>

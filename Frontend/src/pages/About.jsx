@@ -34,6 +34,8 @@ function About() {
                 color: 'var(--text-primary)',
                 transition: 'background-color 0.2s'
               }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
             >
               GitHub
             </a>
@@ -49,6 +51,8 @@ function About() {
                 color: 'var(--text-primary)',
                 transition: 'background-color 0.2s'
               }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
             >
               LinkedIn
             </a>
@@ -62,8 +66,29 @@ function About() {
                 color: 'var(--text-primary)',
                 transition: 'background-color 0.2s'
               }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
             >
               Email
+            </a>
+            <a 
+              href="/resume.pdf"
+              download
+              style={{
+                padding: '10px 20px',
+                border: '1px solid var(--border)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: 'var(--text-primary)',
+                transition: 'background-color 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+            >
+              📄 Resume
             </a>
           </div>
         </div>
