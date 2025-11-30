@@ -105,9 +105,9 @@ class HandshakingLemma(Scene):
         # Show the formula
         self.play(FadeOut(odd_degree_text))
         
-        formula1 = MathTex(
-            r"\text{Sum of degrees} = 2 \times \text{(number of edges)}",
-            font_size=36
+        formula1 = Text(
+            "Sum of degrees = 2 × (number of edges)",
+            font_size=32
         )
         formula1.to_edge(DOWN).shift(UP * 1.5)
         self.play(Write(formula1))
@@ -117,9 +117,9 @@ class HandshakingLemma(Scene):
         sum_degrees = sum(degrees.values())
         num_edges = len(edges)
         
-        calculation = MathTex(
-            f"{sum_degrees} = 2 \\times {num_edges}",
-            font_size=36,
+        calculation = Text(
+            f"{sum_degrees} = 2 × {num_edges}",
+            font_size=32,
             color=GREEN
         )
         calculation.next_to(formula1, DOWN, buff=0.3)
