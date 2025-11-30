@@ -18,8 +18,8 @@ function BlogList() {
   }
 
   return (
-    <div>
-      <h1 style={{ fontSize: '42px', marginBottom: '40px', fontWeight: '700' }}>
+    <div style={{ background: 'var(--bg-primary)', padding: '60px 0', minHeight: '100vh' }}>
+      <h1 style={{ fontSize: '32px', marginBottom: '32px', fontWeight: '500' }}>
         All Posts
       </h1>
       <div className="blog-grid">
