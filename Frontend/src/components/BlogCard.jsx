@@ -9,19 +9,9 @@ function BlogCard({ post }) {
   return (
     <Link to={`/blog/${post.slug}`} className="blog-card">
       <h2>{post.title}</h2>
-      <div className="blog-card-meta">
+      <span className="blog-card-meta">
         {formatDate(post.date)}
-      </div>
-      <p className="blog-card-excerpt">{post.excerpt}</p>
-      {post.tags && post.tags.length > 0 && (
-        <div className="blog-card-tags">
-          {post.tags.map((tag, index) => (
-            <span key={index} className="tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
+      </span>
     </Link>
   )
 }
