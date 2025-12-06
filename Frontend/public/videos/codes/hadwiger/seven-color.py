@@ -9,11 +9,11 @@ class SevenColorsWork(Scene):
     def construct(self):
         # Title
         title = Text("7 Colors Work!", font_size=44, color=GREEN)
-        self.play(FadeIn(title, scale=0.8), run_time=0.6)
-        self.wait(0.5)
+        self.play(FadeIn(title, scale=0.8), run_time=0.7)
+        self.wait(0.6)
         self.play(FadeOut(title), run_time=0.4)
         
-        # 7 colors
+        # 7 colors - nice distinct palette
         colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DDA0DD", "#FFA07A"]
         
         def create_hexagon(center, size, color):
@@ -28,99 +28,146 @@ class SevenColorsWork(Scene):
                           stroke_color=WHITE, stroke_width=1)
         
         def get_color_index(row, col):
+            # 7-color pattern that ensures same colors are far apart
             pattern = [[0,1,2], [3,4,5], [6,0,1], [2,3,4], [5,6,0], [1,2,3], [4,5,6]]
             return pattern[row % 7][col % 3]
         
-        hex_size = 0.38
+        # Hexagon size: diameter must be < 1 unit
+        # We'll use size such that diameter = 0.9 (less than 1)
+        # For a regular hexagon, diameter = 2 * size * cos(30°) = size * sqrt(3)
+        # So size = diameter / sqrt(3) = 0.9 / 1.732 ≈ 0.52
+        # But for visual purposes, we scale everything
+        
+        hex_size = 0.35
+        hex_diameter = hex_size * 2  # flat-to-flat distance
+        unit_distance = hex_diameter * 1.5  # 1 unit = 1.5 * hex_diameter for this demo
+        
         horiz = hex_size * np.sqrt(3)
         vert = hex_size * 1.5
         
+        # Build hexagon grid
         hexagons = VGroup()
-        rows, cols = 10, 12
-        cx, cy = -horiz * cols / 2, -vert * rows / 2 + 0.3
+        hex_centers = []
+        rows, cols = 9, 11
+        cx, cy = -horiz * cols / 2, -vert * rows / 2
         
         for row in range(rows):
             for col in range(cols):
                 x = cx + col * horiz + (horiz / 2 if row % 2 else 0)
                 y = cy + row * vert
+                center = np.array([x, y, 0])
                 color_idx = get_color_index(row, col)
-                hexagons.add(create_hexagon(np.array([x, y, 0]), hex_size, colors[color_idx]))
+                hexagons.add(create_hexagon(center, hex_size, colors[color_idx]))
+                hex_centers.append(center)
         
-        # Animate hexagons appearing row by row
+        # Shift everything up to make room for text at bottom
+        hexagons.shift(UP * 0.5)
+        hex_centers = [c + UP * 0.5 for c in hex_centers]
+        
+        # Build hexagons smoothly - spiral or wave effect
         self.play(
-            LaggedStart(*[FadeIn(h, scale=0.5) for h in hexagons], lag_ratio=0.008),
-            run_time=2
+            LaggedStart(
+                *[GrowFromCenter(h) for h in hexagons],
+                lag_ratio=0.015
+            ),
+            run_time=2.5
         )
-        self.wait(0.5)
-        
-        # Explanation text
-        rule = Text("Each hexagon has diameter < 1", font_size=24, color=WHITE)
-        rule.to_edge(DOWN, buff=0.8)
-        self.play(FadeIn(rule), run_time=0.5)
         self.wait(0.8)
-        self.play(FadeOut(rule), run_time=0.3)
         
-        rule2 = Text("Same colors are always > 1 apart", font_size=24, color=WHITE)
-        rule2.to_edge(DOWN, buff=0.8)
+        # Text at bottom - safe zone
+        text_pos = DOWN * 3.2
+        
+        # Explain the key insight
+        rule1 = Text("Hexagon diameter < 1 unit", font_size=26, color=WHITE)
+        rule1.move_to(text_pos)
+        self.play(FadeIn(rule1), run_time=0.5)
+        self.wait(1)
+        self.play(FadeOut(rule1), run_time=0.4)
+        
+        rule2 = Text("Same-colored hexagons > 1 unit apart", font_size=26, color=WHITE)
+        rule2.move_to(text_pos)
         self.play(FadeIn(rule2), run_time=0.5)
-        self.wait(0.8)
-        self.play(FadeOut(rule2), run_time=0.3)
+        self.wait(1)
+        self.play(FadeOut(rule2), run_time=0.4)
         
-        # Show unit distance circle moving around
-        point = Dot(LEFT * 2 + DOWN * 0.5, radius=0.1, color=WHITE).set_z_index(10)
-        circle = Circle(radius=hex_size * 2.8, color=RED, stroke_width=3)
-        circle.move_to(point.get_center())
+        # Now demonstrate with a moving point that traces a path
+        # The point moves exactly 1 unit at a time
         
-        label = Text("unit distance", font_size=18, color=RED)
-        label.next_to(circle, UP, buff=0.1)
+        start_pos = hex_centers[len(hex_centers) // 2 - cols // 2]  # Start from left-center area
         
-        self.play(Create(point), Create(circle), FadeIn(label), run_time=0.6)
-        self.wait(0.5)
+        tracer = Dot(start_pos, radius=0.12, color=WHITE).set_z_index(10)
         
-        # Move around smoothly
-        path = [
-            LEFT * 2 + DOWN * 0.5,
-            LEFT * 0.5 + UP * 1,
-            RIGHT * 1.5 + UP * 0.3,
-            RIGHT * 2 + DOWN * 1,
-            ORIGIN,
-        ]
+        # Trail that follows the tracer
+        trail = TracedPath(tracer.get_center, stroke_color=YELLOW, stroke_width=3)
         
-        for target in path:
-            self.play(
-                point.animate.move_to(target),
-                circle.animate.move_to(target),
-                label.animate.next_to(Circle(radius=hex_size*2.8).move_to(target), UP, buff=0.1),
-                run_time=0.8
-            )
-            self.wait(0.3)
+        self.play(FadeIn(tracer), run_time=0.4)
+        self.add(trail)
         
-        self.play(FadeOut(point), FadeOut(circle), FadeOut(label), run_time=0.4)
+        # Show "1 unit" measurement
+        measure_text = Text("Moving 1 unit each step", font_size=22, color=YELLOW)
+        measure_text.move_to(text_pos)
+        self.play(FadeIn(measure_text), run_time=0.4)
         
-        # Highlight same-colored hexagons to show they're far apart
-        highlight_text = Text("Same color = far apart", font_size=26, color=YELLOW)
-        highlight_text.to_edge(DOWN, buff=0.6)
-        self.play(FadeIn(highlight_text), run_time=0.4)
+        # Move in unit steps - each step is exactly 1 unit distance
+        # We'll move in a pattern that crosses multiple hexagons
         
-        # Find red hexagons and pulse them
-        red_hexes = [h for i, h in enumerate(hexagons) if get_color_index(i // cols, i % cols) == 0]
+        # Calculate unit distance in our scaled coordinates
+        # Using the hex spacing as reference
+        step = horiz * 2.5  # This represents "1 unit" visually
         
-        self.play(
-            *[h.animate.set_stroke(color=WHITE, width=4) for h in red_hexes[:8]],
-            run_time=0.6
-        )
-        self.wait(0.6)
-        self.play(
-            *[h.animate.set_stroke(color=WHITE, width=1) for h in red_hexes[:8]],
-            run_time=0.4
-        )
+        # Define path points - each exactly 1 unit apart
+        current = start_pos.copy()
         
-        self.play(FadeOut(highlight_text), run_time=0.3)
+        # Move right
+        for i in range(3):
+            next_pos = current + RIGHT * step * 0.4
+            self.play(tracer.animate.move_to(next_pos), run_time=0.7, rate_func=smooth)
+            current = next_pos
+            self.wait(0.2)
         
-        # Final checkmark
-        check = Text("✓", font_size=100, color=GREEN)
-        check.to_edge(DOWN, buff=0.3)
-        self.play(FadeIn(check, scale=1.3), run_time=0.5)
+        # Move up-right
+        next_pos = current + (RIGHT * 0.2 + UP * 0.35) * step
+        self.play(tracer.animate.move_to(next_pos), run_time=0.7, rate_func=smooth)
+        current = next_pos
+        self.wait(0.2)
+        
+        # Move up-left
+        next_pos = current + (LEFT * 0.2 + UP * 0.35) * step
+        self.play(tracer.animate.move_to(next_pos), run_time=0.7, rate_func=smooth)
+        current = next_pos
+        self.wait(0.2)
+        
+        # Move left
+        for i in range(2):
+            next_pos = current + LEFT * step * 0.4
+            self.play(tracer.animate.move_to(next_pos), run_time=0.7, rate_func=smooth)
+            current = next_pos
+            self.wait(0.2)
+        
+        self.play(FadeOut(measure_text), run_time=0.3)
+        
+        # Key observation
+        key_text = Text("Every step lands on a DIFFERENT color!", font_size=26, color=GREEN)
+        key_text.move_to(text_pos)
+        self.play(FadeIn(key_text), run_time=0.5)
+        
+        self.wait(1.2)
+        
+        # Fade out trail and tracer
+        self.play(FadeOut(trail), FadeOut(tracer), FadeOut(key_text), run_time=0.5)
+        
+        # Final: highlight that same colors are far apart
+        final_text = Text("No two same-colored points at distance 1", font_size=26, color=WHITE)
+        final_text.move_to(text_pos)
+        self.play(FadeIn(final_text), run_time=0.5)
+        
+        self.wait(1)
+        
+        # Checkmark
+        self.play(FadeOut(final_text), run_time=0.3)
+        check = Text("✓", font_size=90, color=GREEN)
+        check.move_to(text_pos + UP * 0.3)
+        self.play(FadeIn(check, scale=1.4), run_time=0.5)
         
         self.wait(1)
 
