@@ -3,6 +3,7 @@
       "first",
       "adversarial_intro",
       "additive_attack",
-      "minimum_norm"
+      "minimum_norm",
+      "chromatic-plane"
     ]
   }

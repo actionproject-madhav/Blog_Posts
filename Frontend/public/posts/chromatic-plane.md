@@ -1,3 +1,10 @@
+---
+title: "Chromatic Number of a Plane: The Hadwiger-Nelson Problem"
+date: "2025-12-06"
+excerpt: "Exploring the fascinating Hadwiger-Nelson problem: What is the minimum number of colors needed to color every point in the plane such that no two points exactly 1 unit apart share the same color?"
+tags: ["mathematics", "graph-theory", "combinatorics", "open-problem"]
+---
+
 # Chromatic Number of a Plane
 
 > **The Hadwiger-Nelson Problem**: What is the minimum number of colors needed to color every point in the plane such that no two points exactly 1 unit apart share the same color?
