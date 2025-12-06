@@ -18,13 +18,19 @@ function BlogPost() {
 
   useEffect(() => {
     fetch(`/posts/${slug}.md`)
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch post: ${res.status} ${res.statusText}`)
+        }
+        return res.text()
+      })
       .then(text => {
         const { data, content } = matter(text)
         setPost({ ...data, content })
         setLoading(false)
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error(`Error loading post "${slug}":`, error)
         setPost(null)
         setLoading(false)
       })
