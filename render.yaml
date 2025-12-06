@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: blog-frontend
+    env: static
+    buildCommand: cd Frontend && npm install && npm run build
+    staticPublishPath: ./Frontend/dist
+
