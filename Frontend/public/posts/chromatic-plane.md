@@ -19,7 +19,7 @@ This problem was first proposed by Edward Nelson in 1950, but the earlier result
 
 ## 1.) Colouring with 1 is trivially impossible
 
-Let's say point x has color red, then any edge from this point going to another point a unit distance should have a different color.
+Let's say point $x$ has color red, then any edge from this point going to another point a unit distance should have a different color.
 
 ---
 
@@ -27,7 +27,7 @@ Let's say point x has color red, then any edge from this point going to another 
 
 A simple equilateral triangle shows that 2 colours are impossible.
 
-> **Why it fails**: In an equilateral triangle with unit sides, all three vertices are mutually at distance 1 from each other. If vertex A is red, then B must be blue (since A-B = 1 unit). But C is also at distance 1 from both A and B, so C can't be red AND can't be blue. Contradiction!
+> **Why it fails**: In an equilateral triangle with unit sides, all three vertices are mutually at distance 1 from each other. If vertex A is red, then B must be blue (since $|A-B| = 1$ unit). But C is also at distance 1 from both A and B, so C can't be red AND can't be blue. Contradiction!
 
 <video controls width="100%">
   <source src="/videos/codes/hadwiger/media/videos/two-color/480p15/TwoColorsFail.mp4" type="video/mp4">
@@ -40,7 +40,7 @@ A simple equilateral triangle shows that 2 colours are impossible.
 
 Colouring with just 3 colours, while it works for very basic shapes like a triangle, doesn't work for shapes like the **Moser Spindle** as shown.
 
-> **The Moser Spindle (1961)**: This is a 7-vertex, 11-edge unit-distance graph discovered by brothers William and Leo Moser. It consists of two rhombi (with 60° and 120° angles) sharing a vertex. The key insight is that the two "far" vertices of the rhombi are exactly 1 unit apart. When you try to 3-color this graph, you're forced to give both far vertices the same color—but they're connected! This proves χ ≥ 4.
+> **The Moser Spindle (1961)**: This is a 7-vertex, 11-edge unit-distance graph discovered by brothers William and Leo Moser. It consists of two rhombi (with $60^\circ$ and $120^\circ$ angles) sharing a vertex. The key insight is that the two "far" vertices of the rhombi are exactly 1 unit apart. When you try to 3-color this graph, you're forced to give both far vertices the same color—but they're connected! This proves $\chi \geq 4$.
 
 <video controls width="100%">
   <source src="/videos/codes/hadwiger/media/videos/three-color/480p15/ThreeColorsFail.mp4" type="video/mp4">
@@ -56,10 +56,10 @@ So how many colours do you need? Let's start with a large number of colours. Tha
 > **How the 7-coloring works (Isbell, 1950)**:
 > - Tile the plane with regular hexagons of diameter slightly less than 1
 > - Assign 7 colors in a repeating pattern
-> - Since each hexagon has diameter < 1, any two points inside the same hexagon are less than 1 unit apart (so being the same color is fine)
+> - Since each hexagon has diameter $< 1$, any two points inside the same hexagon are less than 1 unit apart (so being the same color is fine)
 > - Same-colored hexagons are always separated by at least 2 "layers" of other hexagons, ensuring they're more than 1 unit apart
 > 
-> This proves χ ≤ 7.
+> This proves $\chi \leq 7$.
 
 <video controls width="100%">
   <source src="/videos/codes/hadwiger/media/videos/seven-color/2160p60/SevenColorsWork.mp4" type="video/mp4">
@@ -82,9 +82,9 @@ Then came **Aubrey de Grey**, a chemist doing math for fun. He showed that 4 col
 > 
 > 2. **Graph J** (31 vertices): 13 copies of H arranged together.
 > 
-> 3. **Graph K** (61 vertices): Two copies of J, with one rotated by 2·arcsin(1/4).
+> 3. **Graph K** (61 vertices): Two copies of J, with one rotated by $2 \cdot \arcsin(1/4)$.
 > 
-> 4. **Graph L** (121 vertices): Two copies of K, with one rotated by 2·arcsin(1/8). **Key property**: In ANY 4-coloring of L, at least one copy of H must contain a monochromatic triple.
+> 4. **Graph L** (121 vertices): Two copies of K, with one rotated by $2 \cdot \arcsin(1/8)$. **Key property**: In ANY 4-coloring of L, at least one copy of H must contain a monochromatic triple.
 > 
 > 5. **Graph M** (1345 vertices): A dense network of Moser spindles surrounding a central copy of H. **Key property**: There is NO 4-coloring of M where the central H has a monochromatic triple.
 > 
@@ -105,7 +105,7 @@ Hence, so far we know that 7 colors is enough to color the plane, and anything l
 
 | Lower Bound | Upper Bound |
 |-------------|-------------|
-| χ ≥ 5 (de Grey, 2018) | χ ≤ 7 (Isbell, 1950) |
+| $\chi \geq 5$ (de Grey, 2018) | $\chi \leq 7$ (Isbell, 1950) |
 
 A [Polymath project](https://dustingmixon.wordpress.com/2018/04/14/polymath16-first-thread-simplifying-de-greys-graph/) has been entirely dedicated to this purpose. Since de Grey's breakthrough, the smallest known 5-chromatic unit-distance graph has been reduced to just **509 vertices** (Parts, 2020).
 
