@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom'
 
-function BlogCard({ post }) {
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(dateString).toLocaleDateString('en-US', options)
-  }
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric'
+  })
+}
 
+function BlogCard({ post }) {
   return (
-    <Link to={`/blog/${post.slug}`} className="blog-card">
-      <h2>{post.title}</h2>
-      <span className="blog-card-meta">
-        {formatDate(post.date)}
-      </span>
-    </Link>
+    <li className="post-list-item">
+      <span className="post-list-date">{formatDate(post.date)}</span>
+      <Link to={`/blog/${post.slug}`} className="post-list-title">
+        {post.title}
+      </Link>
+    </li>
   )
 }
 

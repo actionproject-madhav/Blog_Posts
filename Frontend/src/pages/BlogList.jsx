@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
-import BlogCard from '../components/BlogCard'
+import { Link } from 'react-router-dom'
 import { getAllPosts } from '../utils/markdown'
+
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric'
+  })
+}
 
 function BlogList() {
   const [posts, setPosts] = useState([])
@@ -14,25 +20,30 @@ function BlogList() {
   }, [])
 
   if (loading) {
-    return <div>Loading posts...</div>
+    return (
+      <div className="blog-list-page">
+        <p style={{ color: 'var(--text-3)', fontSize: '14px' }}>Loading…</p>
+      </div>
+    )
   }
 
   return (
-    <div style={{ background: 'var(--bg-primary)', padding: '40px 0', minHeight: '100vh' }}>
-      <h1 style={{ fontSize: '24px', marginBottom: '20px', fontWeight: '500' }}>
-        All Posts
-      </h1>
-      <div className="blog-grid">
-        {posts.length === 0 ? (
-          <p style={{ color: 'var(--text-secondary)' }}>
-            No posts yet. Check back soon!
-          </p>
-        ) : (
-          posts.map(post => (
-            <BlogCard key={post.slug} post={post} />
-          ))
-        )}
-      </div>
+    <div className="blog-list-page">
+      <h1 className="page-heading">Writing</h1>
+      {posts.length === 0 ? (
+        <p style={{ color: 'var(--text-3)', fontSize: '14px' }}>No posts yet. Check back soon!</p>
+      ) : (
+        <ul className="post-list">
+          {posts.map(post => (
+            <li key={post.slug} className="post-list-item">
+              <span className="post-list-date">{formatDate(post.date)}</span>
+              <Link to={`/blog/${post.slug}`} className="post-list-title">
+                {post.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

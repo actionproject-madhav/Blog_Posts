@@ -50,14 +50,14 @@ function BlogPost() {
   }
 
   return (
-    <article className="blog-content" style={{ background: 'var(--bg-primary)', padding: '60px 0', minHeight: '100vh' }}>
+    <article className="blog-content">
       <div className="blog-header">
         <h1>{post.title}</h1>
         <div className="blog-meta">
           {formatDate(post.date)}
         </div>
         {post.tags && post.tags.length > 0 && (
-          <div className="blog-card-tags" style={{ marginTop: '8px', display: 'block' }}>
+          <div className="entry-tags" style={{ marginTop: '10px' }}>
             {post.tags.map((tag, index) => (
               <span key={index} className="tag">
                 {tag}
